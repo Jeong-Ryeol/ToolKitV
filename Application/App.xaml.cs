@@ -11,29 +11,13 @@ namespace ToolKitV
         {
             Mutex = new Mutex(true, ResourceAssembly.GetName().Name);
 
-            bool canStart = false;
-
-#if DEBUG
-            canStart = true;
-#else
-            for (int i = 0; i != e.Args.Length; ++i)
-            {
-                if (e.Args[i] == "-startedFromUpdater")
-                {
-                    canStart = true;
-                    break;
-                }
-            }
-#endif
-            if (!Mutex.WaitOne(0, false) || !canStart)
+            if (!Mutex.WaitOne(0, false))
             {
                 Current.Shutdown();
                 return;
             }
-            else
-            {
-                ShutdownMode = ShutdownMode.OnLastWindowClose;
-            }
+
+            ShutdownMode = ShutdownMode.OnLastWindowClose;
             base.OnStartup(e);
         }
 
@@ -54,7 +38,7 @@ namespace ToolKitV
 
         void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            MessageBox.Show("Error message:\n" + e.Exception.Message + "\n\nIf you need help, write to our discord.\nOur site: umbrella.re", "ToolKitV Crash", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show("오류 메시지:\n" + e.Exception.Message + "\n\n도움이 필요하시면 디스코드로 문의해주세요.\nDiscord: discord.gg/VzHq5ysheb", "시바서버 텍스처 최적화 오류", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }
