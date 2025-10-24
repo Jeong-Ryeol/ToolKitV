@@ -135,6 +135,9 @@
     <None Update="Dependencies\texconv.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Dependencies\CodeWalker.Core.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Libraries\texconv.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
