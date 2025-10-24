@@ -261,12 +261,13 @@ namespace ToolkitV.Models
             return ytd;
         }
 
-        public static ResultsData Optimize(string inputDirectory, string backupDirectory, string optimizeSize, bool onlyOverSized, bool downsize, bool formatOptimization, Delegate optimizeProgressHandler)
+        public static ResultsData Optimize(string inputDirectory, string backupDirectory, string optimizeSize, string fileSizeFilter, bool downsize, bool formatOptimization, Delegate optimizeProgressHandler)
         {
             ResultsData resultsData = new();
 
             string[] inputFiles = Directory.GetFiles(inputDirectory, "*.ytd", SearchOption.AllDirectories);
             ushort optimizeSizeValue = Convert.ToUInt16(optimizeSize);
+            int fileSizeThreshold = Convert.ToInt32(fileSizeFilter);
             bool doBackup = backupDirectory != "";
 
             int currentProgress = 0;
@@ -282,9 +283,9 @@ namespace ToolkitV.Models
 
                 float[] fileSizes = GetFileSize(filePath, logWriter);
 
-                if (onlyOverSized && fileSizes[1] < 16 || (fileSizes[0] == 0.0f && fileSizes[1] == 0.0f))
+                if (fileSizeThreshold > 0 && fileSizes[1] < fileSizeThreshold || (fileSizes[0] == 0.0f && fileSizes[1] == 0.0f))
                 {
-                    logWriter.LogWrite($"File name: {fileName}, not oversized, skip");
+                    logWriter.LogWrite($"File name: {fileName}, below threshold {fileSizeThreshold}MB, skip");
                     continue;
                 }
 

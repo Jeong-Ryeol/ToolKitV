@@ -24,11 +24,12 @@
                 </StackPanel>
 
                 <StackPanel Margin="0 10 0 0">
-                    <local:ToogleButton
-                        x:Name="OnlyOverSized"
-                        Title="16MB 이상 파일만 최적화"
-                        Description="체크 시 16MB를 초과하는 텍스처만 최적화합니다."
-                        PropertyChanged="OnOnlyOverSizedTexturesChanged"/>
+                    <local:FileSizeFilterSlider
+                        x:Name="FileSizeFilter"
+                        Title="파일 크기 필터"
+                        Description="이 크기(MB) 이상의 파일만 최적화합니다. 0을 선택하면 모든 파일을 처리합니다."
+                        NumberValue="16"
+                        PropertyChanged="FileSizeFilter_PropertyChanged"/>
                 </StackPanel>
 
                 <StackPanel Margin="0 0 0 0">
