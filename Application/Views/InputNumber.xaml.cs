@@ -33,7 +33,9 @@ namespace ToolKitV.Views
             }
         }
 
-        public string NumberValue { get; set; } = "";
+        private readonly string[] _values = { "512", "1024", "2048", "4096", "8192" };
+
+        public string NumberValue { get; set; } = "2048";
         public string Value
         {
             get => NumberValue;
@@ -47,42 +49,39 @@ namespace ToolKitV.Views
             }
         }
 
+        public double SliderValueNumber { get; set; } = 2;
+        public double SliderValue
+        {
+            get => SliderValueNumber;
+            set
+            {
+                if (value != SliderValueNumber)
+                {
+                    SliderValueNumber = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
         public InputNumber()
         {
             InitializeComponent();
 
             DataContext = this;
+            UpdateValueFromSlider();
         }
 
-        private static readonly Regex _regex = new Regex("[^0-9]"); // regex that matches disallowed text
-        private static bool IsTextAllowed(string text)
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            return !_regex.IsMatch(text);
+            UpdateValueFromSlider();
         }
 
-
-        // Use the PreviewTextInputHandler to respond to key presses 
-        private void PreviewTextInputHandler(object sender, TextCompositionEventArgs e)
+        private void UpdateValueFromSlider()
         {
-            e.Handled = Value.Length > 4 || !IsTextAllowed(e.Text);
-        }
-
-        // Use the DataObject.Pasting Handler 
-        private void TextBoxPasting(object sender, DataObjectPastingEventArgs e)
-        {
-            if (e.DataObject.GetDataPresent(typeof(string)))
+            int index = (int)SliderValue;
+            if (index >= 0 && index < _values.Length)
             {
-                string text = (string)e.DataObject.GetData(typeof(string));
-                if (Value.Length >= 4 || !IsTextAllowed(text))
-                {
-                    e.CancelCommand();
-                }
-
-                Value = text;
-            }
-            else
-            {
-                e.CancelCommand();
+                Value = _values[index];
             }
         }
     }

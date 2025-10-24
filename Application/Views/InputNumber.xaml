@@ -8,57 +8,82 @@
              d:DataContext="{Binding Mode=Default, RelativeSource={RelativeSource Self}}">
     <Grid>
         <StackPanel>
-            <Label
-                Margin="0 14 0 0"
-                HorizontalAlignment="Left"
-                Foreground="White"
-                Style="{StaticResource TT Norms Regular}" 
-                FontSize="14" 
-                Content="{Binding Title}"/>
-
-            <StackPanel Margin="0 8 0 0" Orientation="Horizontal">
-                <TextBox
-                    PreviewTextInput="PreviewTextInputHandler"
-                    DataObject.Pasting="TextBoxPasting"
-                    Padding="10 6 0 0"
-                    Width="300"
-                    Height="30" 
+            <StackPanel Orientation="Horizontal" Margin="0 14 0 0">
+                <Label
                     HorizontalAlignment="Left"
-                    BorderBrush="#00000000"
+                    Foreground="White"
+                    Style="{StaticResource TT Norms Regular}"
                     FontSize="14"
-                    Text="{Binding Value}"
-                    SelectionBrush="#A0FFFFFF"
-                    CaretBrush="White"
-                    MaxLength="4"
-                    IsEnabled="{Binding IsInputEnabled}"
-                    >
-                    <TextBox.Resources>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="CornerRadius" Value="6"/>
-                        </Style>
-                    </TextBox.Resources>
-                    <TextBox.Style>
-                        <Style TargetType="{x:Type TextBox}">
-                            <Setter Property="TextElement.FontFamily"
-                                Value="Assets/Fonts/#TT Norms Regular"/>
-                            <Setter Property="Background" Value="#15FFFFFF" />
-                            <Setter Property="Foreground" Value="#99FFFFFF" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsInputEnabled}" Value="True">
-                                    <Setter Property="Background" Value="#15FFFFFF" />
-                                    <Setter Property="Foreground" Value="#99FFFFFF" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding IsInputEnabled}" Value="False">
-                                    <Setter Property="Background" Value="#0DFFFFFF" />
-                                    <Setter Property="Foreground" Value="#30FFFFFF" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
-                </TextBox>
+                    Content="{Binding Title}"/>
+                <Label
+                    Margin="10 0 0 0"
+                    HorizontalAlignment="Left"
+                    Foreground="#99FFFFFF"
+                    Style="{StaticResource TT Norms Medium}"
+                    FontSize="14"
+                    Content="{Binding Value}"/>
             </StackPanel>
 
-            <Label 
+            <Slider
+                x:Name="ValueSlider"
+                Margin="0 8 0 0"
+                Width="300"
+                HorizontalAlignment="Left"
+                Minimum="0"
+                Maximum="4"
+                TickFrequency="1"
+                IsSnapToTickEnabled="True"
+                Value="{Binding SliderValue}"
+                ValueChanged="Slider_ValueChanged"
+                IsEnabled="{Binding IsInputEnabled}">
+                <Slider.Style>
+                    <Style TargetType="Slider">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Slider">
+                                    <Grid>
+                                        <Border
+                                            Height="4"
+                                            Background="#15FFFFFF"
+                                            CornerRadius="2"/>
+                                        <Track x:Name="PART_Track">
+                                            <Track.DecreaseRepeatButton>
+                                                <RepeatButton Command="Slider.DecreaseLarge" Style="{StaticResource SliderButtonStyle}"/>
+                                            </Track.DecreaseRepeatButton>
+                                            <Track.IncreaseRepeatButton>
+                                                <RepeatButton Command="Slider.IncreaseLarge" Style="{StaticResource SliderButtonStyle}"/>
+                                            </Track.IncreaseRepeatButton>
+                                            <Track.Thumb>
+                                                <Thumb>
+                                                    <Thumb.Template>
+                                                        <ControlTemplate>
+                                                            <Ellipse
+                                                                Width="16"
+                                                                Height="16"
+                                                                Fill="White"
+                                                                Cursor="Hand"/>
+                                                        </ControlTemplate>
+                                                    </Thumb.Template>
+                                                </Thumb>
+                                            </Track.Thumb>
+                                        </Track>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Slider.Style>
+            </Slider>
+
+            <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                <Label Content="512" Foreground="#33FFFFFF" Style="{StaticResource TT Norms Regular}" FontSize="10"/>
+                <Label Content="1024" Margin="38 0 0 0" Foreground="#33FFFFFF" Style="{StaticResource TT Norms Regular}" FontSize="10"/>
+                <Label Content="2048" Margin="38 0 0 0" Foreground="#33FFFFFF" Style="{StaticResource TT Norms Regular}" FontSize="10"/>
+                <Label Content="4096" Margin="38 0 0 0" Foreground="#33FFFFFF" Style="{StaticResource TT Norms Regular}" FontSize="10"/>
+                <Label Content="8192" Margin="38 0 0 0" Foreground="#33FFFFFF" Style="{StaticResource TT Norms Regular}" FontSize="10"/>
+            </StackPanel>
+
+            <Label
                 HorizontalAlignment="Left"
                 Foreground="#33FFFFFF"
                 Style="{StaticResource TT Norms Regular}"
