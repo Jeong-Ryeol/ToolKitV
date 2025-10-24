@@ -11,7 +11,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Tools Menu"
+        <TextBlock Text="도구 메뉴"
             Foreground="#FFFFFF"
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
@@ -40,7 +40,7 @@
                     <StackPanel Orientation="Horizontal">
                         <Image HorizontalAlignment="Left" Margin="11 0 0 0" Width="24" Height="24" Source="../Assets/Images/textureIcon.png"/>
 
-                        <TextBlock Text="Texture Optimizer"
+                        <TextBlock Text="텍스처 최적화"
                             Foreground="#FFFFFF"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
@@ -68,7 +68,7 @@
                     <StackPanel Orientation="Horizontal">
                         <Image  HorizontalAlignment="Left" Margin="11 0 0 0" Width="24" Height="24" Source="../Assets/Images/vehiclesIcon.png"/>
 
-                        <TextBlock Text="Vehicles"
+                        <TextBlock Text="차량"
                             Foreground="#0FFFFFFF"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
@@ -96,7 +96,7 @@
                     <StackPanel Orientation="Horizontal">
                         <Image HorizontalAlignment="Left" Margin="11 0 0 0" Width="24" Height="24" Source="../Assets/Images/clothesIcon.png"/>
 
-                        <TextBlock Text="Clothes"
+                        <TextBlock Text="의상"
                             Foreground="#0FFFFFFF"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"

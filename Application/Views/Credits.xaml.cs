@@ -6,8 +6,8 @@ namespace ToolKitV.Views
 {
     public partial class Credits : UserControl
     {
-        private readonly string DiscordUrl = "https://discord.gg/8mEAy9a";
-        private readonly string SiteUrl = "https://umbrella.re";
+        private readonly string DiscordUrl = "https://discord.gg/sibaserver";
+        private readonly string SiteUrl = "https://github.com/Jeong-Ryeol/ToolKitV";
         public string Version { get; set; } = "";
         public Credits()
         {
