@@ -116,7 +116,7 @@ namespace ToolKitV.Views
         {
             OptimizeButton.IsButtonEnabled = false;
             AnalyzeButton.IsButtonEnabled = false;
-            AnalyzeButton.Title = "In progress...";
+            AnalyzeButton.Title = "분석 중...";
 
             StatsData data = await Task.Run(() => GetStatsData(MainPath, AnalyzeProgressHandler));
 
@@ -124,7 +124,7 @@ namespace ToolKitV.Views
 
             OptimizeButton.IsButtonEnabled = true;
             AnalyzeButton.IsButtonEnabled = true;
-            AnalyzeButton.Title = "Analyze";
+            AnalyzeButton.Title = "분석";
             AnalyzeButton.Progress.Width = 0;
         }
 
@@ -132,7 +132,7 @@ namespace ToolKitV.Views
         {
             OptimizeButton.IsButtonEnabled = false;
             AnalyzeButton.IsButtonEnabled = false;
-            OptimizeButton.Title = "In progress...";
+            OptimizeButton.Title = "최적화 중...";
 
             StatsData data = await Task.Run(() => GetStatsData(MainPath, null));
 
@@ -142,7 +142,7 @@ namespace ToolKitV.Views
 
             OptimizeButton.IsButtonEnabled = true;
             AnalyzeButton.IsButtonEnabled = true;
-            OptimizeButton.Title = "Optimize";
+            OptimizeButton.Title = "최적화";
             OptimizeButton.Progress.Width = 0;
 
             StatsData newData = await Task.Run(() => GetStatsData(MainPath, null));

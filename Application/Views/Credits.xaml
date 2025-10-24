@@ -9,12 +9,12 @@
     <Grid>
         <StackPanel Orientation="Horizontal">
             <StackPanel>
-                <TextBlock 
+                <TextBlock
                     HorizontalAlignment="Left"
                     Foreground="#33FFFFFF"
                     Style="{StaticResource TT Norms Bold}"
                     FontSize="10"
-                    Text="Umbrella.re, 2021-2022"/>
+                    Text="시바서버, 2025"/>
 
                 <TextBlock 
                     HorizontalAlignment="Left"
