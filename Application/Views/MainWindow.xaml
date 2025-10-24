@@ -12,7 +12,10 @@
         FocusVisualStyle="{x:Null}">
 
     <Window.Background>
-        <ImageBrush ImageSource="../Assets/Images/BG.jpg"></ImageBrush>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#667eea" Offset="0.0"/>
+            <GradientStop Color="#764ba2" Offset="1.0"/>
+        </LinearGradientBrush>
     </Window.Background>
 
     <Grid>
