@@ -36,7 +36,7 @@
                         x:Name="OptimizeSize"
                         Title="Optimize Size"
                         Description="Width + Height in px = Optimize size. If nothing is optimized,&#10;try to set less values(4096, 2048, 1024, 512)"
-                        NumberValue="8192"
+                        NumberValue="2048"
                         PropertyChanged="OptimizeSize_PropertyChanged"/>
                 </StackPanel>
 
@@ -46,7 +46,7 @@
                         Title="Downsize"
                         Description="If enabled, the size of textures will be reduced by 2 times."
                         PropertyChanged="Downsize_PropertyChanged"
-                        IsToogled="True"/>
+                        IsToogled="False"/>
                 </StackPanel>
 
                 <StackPanel Margin="0 10 0 0">

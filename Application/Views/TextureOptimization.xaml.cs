@@ -11,9 +11,9 @@ namespace ToolKitV.Views
     {
         public string MainPath { get; set; } = "";
         public string BackupPath { get; set; } = "";
-        public string OptimizeSizeValue { get; set; } = "8192";
+        public string OptimizeSizeValue { get; set; } = "2048";
         public bool OnlyOverSizedToogled { get; set; } = false;
-        public bool DownSizeValue { get; set; } = true;
+        public bool DownSizeValue { get; set; } = false;
         public bool FormatOptimizeValue { get; set; } = false;
         public TextureOptimization()
         {
@@ -130,11 +130,6 @@ namespace ToolKitV.Views
 
         private async void OptimizeButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!DownSizeValue && !FormatOptimizeValue)
-            {
-                return;
-            }
-
             OptimizeButton.IsButtonEnabled = false;
             AnalyzeButton.IsButtonEnabled = false;
             OptimizeButton.Title = "In progress...";

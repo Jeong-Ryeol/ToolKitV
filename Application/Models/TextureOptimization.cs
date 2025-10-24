@@ -98,14 +98,29 @@ namespace ToolkitV.Models
         {
             int minSide = Math.Min(texture.Width, texture.Height);
             int maxLevel = (int)Math.Log(minSide, 2);
+            int optimalLevel = Math.Max(1, maxLevel - 2);
+            bool mipmapNeedsUpdate = texture.Levels > optimalLevel;
 
-            if (texture.Levels >= maxLevel)
+            bool resolutionChanged = false;
+            if (downsize)
             {
-                texture.Levels = Convert.ToByte(maxLevel - 1);
+                texture.Width /= 2;
+                texture.Height /= 2;
+                texture.Levels = Convert.ToByte(Math.Log(Math.Min(texture.Width, texture.Height), 2) - 1);
+                resolutionChanged = true;
+            }
+            else if (mipmapNeedsUpdate)
+            {
+                texture.Levels = Convert.ToByte(optimalLevel);
+            }
+
+            bool needsRecompression = resolutionChanged || mipmapNeedsUpdate || formatOptimization;
+            if (!needsRecompression)
+            {
+                return texture;
             }
 
             TempFileData tempFileData = CreateTempTextureFile(texture);
-
             if (tempFileData.dds == null)
             {
                 return texture;
@@ -130,15 +145,12 @@ namespace ToolkitV.Models
             {
                 switch (texture.Format)
                 {
-                    // compressed
                     case TextureFormat.D3DFMT_DXT1: texConvFormat = "BC1_UNORM"; break;
                     case TextureFormat.D3DFMT_DXT3: texConvFormat = "BC2_UNORM"; break;
                     case TextureFormat.D3DFMT_DXT5: texConvFormat = "BC3_UNORM"; break;
                     case TextureFormat.D3DFMT_ATI1: texConvFormat = "BC4_UNORM"; break;
                     case TextureFormat.D3DFMT_ATI2: texConvFormat = "BC5_UNORM"; break;
-                    case TextureFormat.D3DFMT_BC7: texConvFormat = "BC5_UNORM"; break;
-
-                    // uncompressed
+                    case TextureFormat.D3DFMT_BC7: texConvFormat = "BC7_UNORM"; break;
                     case TextureFormat.D3DFMT_A1R5G5B5: texConvFormat = "B5G5R5A1_UNORM"; break;
                     case TextureFormat.D3DFMT_A8: texConvFormat = "A8_UNORM"; break;
                     case TextureFormat.D3DFMT_A8B8G8R8: texConvFormat = "R8G8B8A8_UNORM"; break;
@@ -147,15 +159,7 @@ namespace ToolkitV.Models
                 }
             }
 
-            if (downsize)
-            {
-                texture.Width /= 2;
-                texture.Height /= 2;
-                texture.Levels = Convert.ToByte(Math.Log(Math.Min(texture.Width, texture.Height), 2) - 1);
-            }
-
             texture = ConvertTexture(texture, texConvFormat, tempFileData);
-
             return texture;
         }
 
