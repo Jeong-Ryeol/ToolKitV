@@ -7,7 +7,7 @@
         <Style x:Key="TT Norms Regular">
             <Setter Property="TextElement.FontFamily"
                     Value="Assets/Fonts/#TT Norms Regular"/>
-        </Style>        
+        </Style>
         <Style x:Key="TT Norms Medium">
             <Setter Property="TextElement.FontFamily"
                     Value="Assets/Fonts/#TT Norms Medium"/>
@@ -15,6 +15,19 @@
         <Style x:Key="TT Norms Bold">
             <Setter Property="TextElement.FontFamily"
                     Value="Assets/Fonts/#TT Norms Bold"/>
+        </Style>
+        <Style x:Key="SliderButtonStyle" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border Background="Transparent"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Application.Resources>
 </Application>
