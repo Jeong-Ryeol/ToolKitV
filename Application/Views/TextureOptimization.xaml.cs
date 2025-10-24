@@ -12,7 +12,7 @@ namespace ToolKitV.Views
         public string MainPath { get; set; } = "";
         public string BackupPath { get; set; } = "";
         public string OptimizeSizeValue { get; set; } = "2048";
-        public bool OnlyOverSizedToogled { get; set; } = false;
+        public string FileSizeFilterValue { get; set; } = "16";
         public bool DownSizeValue { get; set; } = false;
         public bool FormatOptimizeValue { get; set; } = false;
         public TextureOptimization()
@@ -91,10 +91,9 @@ namespace ToolKitV.Views
             BackupPath = BackupFolder.Path;
         }
 
-        private void OnOnlyOverSizedTexturesChanged(object sender, PropertyChangedEventArgs e)
+        private void FileSizeFilter_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnlyOverSizedToogled = OnlyOverSized.IsToogled;
-            //OptimizeSize.IsInputEnabled = !OnlyOverSized.IsToogled;
+            FileSizeFilterValue = FileSizeFilter.Value;
         }
 
         private void OptimizeSize_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -138,7 +137,7 @@ namespace ToolKitV.Views
 
             UpdateData(data);
 
-            await Task.Run(() => Optimize(MainPath, BackupPath, OptimizeSizeValue, OnlyOverSizedToogled, DownSizeValue, FormatOptimizeValue, OptimizeProgressHandler));
+            await Task.Run(() => Optimize(MainPath, BackupPath, OptimizeSizeValue, FileSizeFilterValue, DownSizeValue, FormatOptimizeValue, OptimizeProgressHandler));
 
             OptimizeButton.IsButtonEnabled = true;
             AnalyzeButton.IsButtonEnabled = true;
